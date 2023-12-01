@@ -13,6 +13,7 @@
     
         @foreach ($tasks as $task)
             @include('tasks.item')
+            <hr>
         @endforeach
 
 
