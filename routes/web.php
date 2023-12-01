@@ -2,15 +2,19 @@
 
 use App\Models\Task;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\TasksController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/tasks', 'App\Http\Controllers\TasksController@index');
-Route::get('/tasks/create', 'App\Http\Controllers\TasksController@create');
+Route::view('/', 'welcome');
 
-Route::post('/tasks', 'App\Http\Controllers\TasksController@store');
+/**
+ * GET /tasks (index)
+ * GET /tasks/create (create)
+ * GET /tasks/1 (show)
+ * POST /tasks (store)
+ * GET /tasks/1/edit (edit)
+ * PATCH /tasks/1 (update)
+ * DELETE /tasks/1 (destroy)
+ */
 
-Route::get('/tasks/{task}', 'App\Http\Controllers\TasksController@show');
+Route::resource('/tasks', 'App\Http\Controllers\TasksController');
