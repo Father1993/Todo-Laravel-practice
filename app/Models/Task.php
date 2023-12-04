@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use App\Events\TaskCreated;
+use App\Http\Controllers\TasksController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PhpParser\Node\Expr\FuncCall;
+use Illuminate\Database\Eloquent\Collection;
 
 class Task extends \Illuminate\Database\Eloquent\Model
 {
@@ -48,5 +51,30 @@ class Task extends \Illuminate\Database\Eloquent\Model
     public function owner () 
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function isCompleted()
+    {
+        return (bool) $this->completed;
+    }
+
+    public function isNotCompleted()
+    {
+        return  ! $this->completed;
+    }
+
+    public function newCollection(array $models = [])
+    {
+        return new class($models) extends Collection {
+            public function allCompleted()
+            {
+                return $this->filter->isCompleted();
+            }
+
+            public function allNotCompleted()
+            {
+                return $this->filter->isNotCompleted();
+            }
+        };
     }
 }

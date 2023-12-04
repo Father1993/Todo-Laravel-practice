@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,7 +15,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        
+        Collection::macro('toUpper', function (){
+            return $this->map(function($item) {
+                return \Illuminate\Support\Str::upper($item);
+            });
+        });
     }
 
     /**
