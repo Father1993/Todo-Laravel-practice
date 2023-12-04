@@ -20,10 +20,23 @@
                 value="{{old('title', $task->title) }}"
                 name="title">
             </div>
+
             <div class="mb-3">
                 <label for="inputBody" class="form-label">Описание задачи</label>
                 <textarea name="body" class="form-control" id="inputBody">{{ old ('body', $task->body) }}</textarea>
             </div>
+
+            <div class="mb-3">
+                <label for="inputTags" class="form-label">Теги</label>
+                <input name="tags"
+                        type="text"
+                        class="form-control" 
+                        id="inputTags"
+                        value="{{ old ('tags', $task->tags->pluck('name')->implode(',')) }}"
+                >
+        
+            </div>
+
             <button type="submit" class="btn btn-primary">Изменить</button>
         </form>
 

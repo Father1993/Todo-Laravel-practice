@@ -16,6 +16,8 @@ use App\Http\Controllers\TasksController;
 
 Route::view('/', 'welcome');
 
+Route::get('/tasks/tags/{tag}', 'App\Http\Controllers\TagsController@index');
+
 Route::resource('/tasks', 'App\Http\Controllers\TasksController');
 
 Route::post('/tasks/{task}/steps', 'App\Http\Controllers\TaskStepsController@store');

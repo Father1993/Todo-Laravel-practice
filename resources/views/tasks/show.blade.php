@@ -6,6 +6,9 @@
             {{ $task->title }}
             <a href="/skillbox_laravel/public/tasks/{{ $task->id }}/edit">Изменить</a>
         </h3>
+
+
+        @include('tasks.tags', ['tags' => $task->tags])
         
         {{ $task->body }}
 

@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Monolog\Handler\RedisHandler;
+use App\Models\Tag;
 
 class TasksController extends Controller
 {
     
     public function index()
     {
-        $tasks = Task::latest()->get();
+        $tasks = Task::with('tags')->latest()->get();
 
         return view('tasks.index', compact('tasks'));
     }
@@ -37,7 +38,7 @@ class TasksController extends Controller
         return redirect('/tasks');
     }
 
-    public function edit (Task $task)
+    public function edit (Task $task)   
     {
         return view('tasks.edit', compact('task'));
     }
@@ -50,6 +51,23 @@ class TasksController extends Controller
         ]);
 
         $task->update($attributes);
+
+        /** @var Collection $taskTags */
+        $taskTags = $task->tags->keyBy('name');
+
+        $tags = collect(explode(',', request('tags')))->keyBy(function ($item) {return $item; });
+
+        $syncIds = $taskTags->intersectByKeys($tags)->pluck('id')->toArray();
+
+        $tagsToAttach = $tags->diffKeys($taskTags);
+
+        foreach ($tagsToAttach as $tag) {
+            $tag = Tag::firstOrCreate(['name'=>$tag]);
+
+            $syncIds[] = $tag->id;
+        };
+
+        $task->tags()->sync($syncIds);
 
         return redirect('/tasks');
     }
