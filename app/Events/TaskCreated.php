@@ -22,6 +22,6 @@ class TaskCreated
      */
     public function __construct(Task $task)
     {
-        
+        $this->task = $task;
     }
 }

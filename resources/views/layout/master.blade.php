@@ -23,6 +23,10 @@
 
             @include('layout.nav')
 
+            <div class="container">
+                @include('layout.flash_message')
+            </div>
+
             @yield('content')
 
             @include('layout.sidebar')
