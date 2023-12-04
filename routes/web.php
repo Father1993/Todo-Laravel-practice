@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TasksController;
 
 Route::view('/', 'welcome');
+Route::view('/demo', 'demo');
 
 Route::get('/tasks/tags/{tag}', 'App\Http\Controllers\TagsController@index');
 

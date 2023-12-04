@@ -11,10 +11,8 @@
         Список задач
       </h3>
     
-        @foreach ($tasks as $task)
-            @include('tasks.item')
-            <hr>
-        @endforeach
+
+        @each('tasks.item', $tasks, 'task')
 
 </main>
 @endsection

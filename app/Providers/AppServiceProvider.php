@@ -6,6 +6,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\View\Compilers\BladeCompiler;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -30,5 +32,11 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layout.sidebar', function ($view){
             $view->with('tagsCloud', \App\Models\Tag::tagsCloud());
         });
-    }
+    /*
+        \Blade::component('components.alert', 'alert');
+        \Blade::directive('datetime', function ($value) {
+            return "<?php echo ($value)->toFormattedDateString ?>";
+        });
+    */
+    } 
 }
