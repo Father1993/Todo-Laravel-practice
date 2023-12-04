@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\TaskCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +14,10 @@ class Task extends \Illuminate\Database\Eloquent\Model
     // public $fillable = ['title', 'body'];
     public $guarded = [];
 
+    protected $dispatchesEvents = [
+        'created' => TaskCreated::class,
+    ];
+    
     public function getRouteKeyName()
     {
         return 'id';
@@ -38,5 +43,10 @@ class Task extends \Illuminate\Database\Eloquent\Model
     public function addStep($attributes)
     {
         return $this->steps()->create($attributes);
+    }
+
+    public function owner () 
+    {
+        return $this->belongsTo(User::class);
     }
 }

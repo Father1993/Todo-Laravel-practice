@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Monolog\Handler\RedisHandler;
 use App\Models\Tag;
+use App\Mail\TaskCreated;
+use App\Mail;
 
 class TasksController extends Controller
 {
@@ -33,7 +35,10 @@ class TasksController extends Controller
             'body' => 'required',
         ]);
 
-        Task::create($attributes);
+        $task = Task::create($attributes);
+
+        event(new TaskCreated($task));
+
 
         return redirect('/tasks');
     }
