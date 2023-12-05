@@ -39,7 +39,6 @@
             @endpush
             
             @prepend('scripts')
-                ///
             @endprepend
 
             @stack('scripts')

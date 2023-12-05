@@ -12,7 +12,7 @@ class PushAllServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(\App\Models\Service\Pushall::class, function () {
-            return new \App\Models\Service\Pushall(config('andrej.pushall.api.key'));
+            return new \App\Models\Service\Pushall(config('andrej.pushall.api.key'), config('andrej.pushall.api.id'));
         });
     }
 
