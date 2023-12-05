@@ -13,10 +13,10 @@ class TasksToUserSeeder extends Seeder
      */
     public function run(): void
     {
-        factory(\App\Models\Task::class, 5)->create([
+        \App\Models\Task::factory(5)->create([
                 'id'=> \App\Models\User::first() 
             ])->each(function (\App\Models\Task $task) {
-                $task->steps()->saveMany(factory(\App\Models\Step::class, rand(1, 5))->make(['task_id'=> '']));
+                $task->steps()->saveMany(\App\Models\Step::factory(rand(1,5))->make(['task_id'=> '']));
             });
     }
 }

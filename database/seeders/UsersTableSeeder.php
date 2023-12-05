@@ -12,8 +12,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = factory(\App\User::class, 10)->create([]);
-        $data = factory(\App\User::class, 10)->make([]);
-        $data = factory(\App\User::class, 10)->raw([]);
+        $data = \App\Models\User::factory(10)->create([]);
+        $data = \App\Models\User::factory(10)->make([]);
+        $data = \App\Models\User::factory(10)->raw([]);
+
+
     }
 }
