@@ -27,9 +27,12 @@
                                     {{ $step->completed ? 'checked' : ''}}>
                                     
                                     {{ $step->description }}
+                                    
                                 </label>
                             </div>
                         </form>
+
+                        @include('tasks.tags', ['tags' => $step->tags])
                     </li>    
                 @endforeach
             </ul>
@@ -37,6 +40,7 @@
         
         <form class="card card-body mb-4" method="POST" action="/skillbox_laravel/public/tasks/{{ $task->id }}/steps">
             @csrf
+
             <div class="form-group">
                 <input
                     type="text"
@@ -44,6 +48,13 @@
                     placeholder="Шаг"
                     value="{{ old('description') }}"
                     name="description"
+                >
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Теги"
+                    value="{{ old('tags') }}"
+                    name="tags"
                 >
             </div>
             <button type="submit" class="btn btn-primary">Добавить шаг</button>

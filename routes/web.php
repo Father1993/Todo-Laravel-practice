@@ -4,9 +4,16 @@ use App\Models\Task;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TasksController;
 use App\Models\Company;
+use Illuminate\Support\Facades\DB;
+
+use function Laravel\Prompts\table;
 
 Route::view('/', 'welcome');
 Route::view('/demo', 'demo');
+
+Route::get('test', function () {
+
+});
 
 Route::get('/tasks/tags/{tag}', 'App\Http\Controllers\TagsController@index');
 
